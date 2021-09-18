@@ -1,15 +1,19 @@
 import React from 'react';
+import {sampleData} from '../../../app/api/sampleData.js';
 import {Grid} from 'semantic-ui-react';
+import EventList from './EventList';
+import EventForm from '../eventForm/EventForm';
+
 
 // array functions
 const EventDashboard  = ()  => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <h2>Left Column</h2>
+                <EventList events={sampleData} />
             </Grid.Column>
             <Grid.Column width={6}>
-                <h2>Right Column</h2>
+                <EventForm />
             </Grid.Column>
         </Grid>
     )

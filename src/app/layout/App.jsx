@@ -4,13 +4,15 @@ import NavBar from '../../features/nav/NavBar';
 import {Container} from 'semantic-ui-react';
 
 function App() {
-  return (<div>
+  return (
+  <>
   <NavBar />
-  <Container classNAme="main">
+  <Container className="main">
   <EventDashboard />
   </Container>
   
-</div>);
+</>
+);
 }
 
 export default App;
