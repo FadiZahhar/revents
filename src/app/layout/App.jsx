@@ -1,9 +1,12 @@
 import React from 'react';
+import EventDashboard from '../../features/events/eventDashboard/EventDashboard';
+import NavBar from '../../features/nav/NavBar';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <h1>Re-vents</h1>
+    <div>
+      <NavBar />
+      <EventDashboard />
     </div>
   );
 }
