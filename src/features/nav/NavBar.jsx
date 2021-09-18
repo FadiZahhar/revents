@@ -1,7 +1,8 @@
-import react from 'react';
-import { Menu } from 'semantic-ui-react';
+import React from 'react';
+import { Menu,Container,Button } from 'semantic-ui-react';
 
 export default function NavBar() {
+    return (
     <Menu inverted fixed='top'>
         <Container>
             <Menu.Item header>
@@ -14,9 +15,11 @@ export default function NavBar() {
             </Menu.Item>
             <Menu.Item position="right"> 
                 <Button  basic inverted center content="Login" />
-                <Button  basic inverted center content="Register" style={{marginLeft: '0.5em'}} />
+                <Button  basic inverted center content="Register" 
+                style={{marginLeft: '0.5em'}} />
             </Menu.Item>
             
         </Container>
     </Menu>
+    )
 }
