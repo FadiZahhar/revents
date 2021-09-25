@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Menu,Container,Button } from 'semantic-ui-react';
 
 export default function NavBar({setFormOpen}) {
+
+
     return (
     <Menu inverted fixed='top'>
         <Container>
