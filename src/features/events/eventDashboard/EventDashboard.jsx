@@ -6,8 +6,9 @@ import EventForm from '../eventForm/EventForm';
 
 
 // array functions
-const EventDashboard  = ({formOpen,setFormOpen})  => {
-    const {events,setEvents} = useState(sampleData);
+const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
+    const [events,setEvents] = useState(sampleData);
+    
     
     function handleCreateEvent(event) {
         setEvents([...events, event])
@@ -16,7 +17,7 @@ const EventDashboard  = ({formOpen,setFormOpen})  => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <EventList events={sampleData} />
+                <EventList events={events} selectEvent={selectEvent} />
             </Grid.Column>
             <Grid.Column width={6}>
                 {formOpen &&
@@ -24,6 +25,7 @@ const EventDashboard  = ({formOpen,setFormOpen})  => {
                 setFormOpen={setFormOpen} 
                 setEvents={setEvents} 
                 createEvent={handleCreateEvent} 
+                selectedEvent={selectedEvent}
                 />}
             </Grid.Column>
         </Grid>
