@@ -1,4 +1,5 @@
-import React, {Segment, Image, Item, Header, Button} from 'react';
+import React from 'react';
+import {Segment, Image, Item, Header, Button}   from 'semantic-ui-react';
 
 export default function EventDetailedHeader() {
     const eventImageStyle = {
@@ -15,11 +16,12 @@ export default function EventDetailedHeader() {
     };
     
     return (
+        <>
         <Segment.Group>
     <Segment basic attached="top" style={{padding: '0'}}>
-        <Image src={`/assets/categoryImages/drinks.jpg`} fluid />
+        <Image src={`/assets/categoryImages/drinks.jpg`} fluid style={eventImageStyle}/>
 
-        <Segment basic>
+        <Segment basic style={eventImageTextStyle}>
             <Item.Group>
                 <Item>
                     <Item.Content>
@@ -47,5 +49,6 @@ export default function EventDetailedHeader() {
         </Button>
     </Segment>
 </Segment.Group>
+</>
     )
 }
