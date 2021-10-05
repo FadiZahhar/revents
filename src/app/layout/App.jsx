@@ -6,6 +6,7 @@ import EventDetails from '../../features/events/eventDetailed/EventDetailedPage'
 import NavBar from '../../features/nav/NavBar';
 import {Container} from 'semantic-ui-react';
 import {Route} from 'react-router-dom';
+import Sandbox from '../../features/sandbox/Sandbox';
 
 function App() {
   const [formOpen,setFormOpen] = useState(false);
@@ -28,7 +29,8 @@ function App() {
     <>
     <NavBar setFormOpen={handleCreateFormOpen} />
     <Container className="main">
-      <Route exact path='/events' component={EventDashboard} /> 
+      <Route exact path='/events/' component={EventDashboard} /> 
+      <Route exact path='/sandbox/' component={Sandbox} /> 
       <Route path='/events/:id' component={EventDetails} />
       <Route path='/createEvent' component={EventForm} />
     </Container>

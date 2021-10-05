@@ -4,7 +4,8 @@ import SignedInMenu from './SignedInMenu';
 import SignedOutMenu from './SignedOutMenu';
 import {
     BrowserRouter as Router,
-    Link
+    Link,
+    NavLink
   } from "react-router-dom";
   import { useHistory } from "react-router-dom";
 
@@ -22,13 +23,12 @@ export default function NavBar({setFormOpen}) {
     return (
     <Menu inverted fixed='top'>
         <Container>
-            <Router>
-            <Menu.Item as={Link} exact to='/' header>
+            <Menu.Item as={NavLink} exact to='/' header>
                 <img src="/assets/logo.png" alt="logo" />
                 Re-vents
             </Menu.Item>
-            <Menu.Item as={Link} name='Events' />
-            </Router>
+            <Menu.Item as={NavLink} exact to='/events/' name='Events' />
+            <Menu.Item as={NavLink} exact to='/sandbox/' name='Sandbox' />
         {authenticated &&
         <Menu.Item>
             <Button onClick={() => setFormOpen(true)} positive inverted center content="Create Event" />
