@@ -3,12 +3,13 @@ import {sampleData} from '../../../app/api/sampleData.js';
 import {Grid} from 'semantic-ui-react';
 import EventList from './EventList';
 import EventForm from '../eventForm/EventForm';
+import { useSelector } from 'react-redux';
 
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
     const [events,setEvents] = useState(sampleData);
-    
+    //const {events} = useSelector(state => state.event);
     
     function handleCreateEvent(event) {
         setEvents([...events, event])

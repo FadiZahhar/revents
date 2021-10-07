@@ -22,5 +22,7 @@ export default function eventReducer(state = initialState, {type,payload}) {
                 ...state,
                 events:[...state.events.filter(evt=>evt.id !== payload)]
             }
+        default:
+            return state;
     }
 }
