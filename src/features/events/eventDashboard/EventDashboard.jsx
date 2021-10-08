@@ -8,21 +8,21 @@ import { useSelector } from 'react-redux';
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
-    const [events,setEvents] = useState(sampleData);
-    //const {events} = useSelector(state => state.event);
+    //const [events,setEvents] = useState(sampleData);
+    const {events} = useSelector(state => state.event);
     
-    function handleCreateEvent(event) {
+    /*function handleCreateEvent(event) {
         setEvents([...events, event])
-    }
+    }*/
 
-    function handleUpdateEvent(updatedEvent) {
+    /*function handleUpdateEvent(updatedEvent) {
         setEvents(events.map(evt => evt.id === updatedEvent.id ? updatedEvent : evt));
         selectEvent(null);
         setFormOpen(false);
-    }
+    }*/
 
     function handleDeleteEvent(eventId) {
-        setEvents(events.filter(evt => evt.id !== eventId));
+        //setEvents(events.filter(evt => evt.id !== eventId));
     }
 
     return (
@@ -34,10 +34,7 @@ const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  =>
                 {formOpen && (
                 <EventForm 
                 setFormOpen={setFormOpen} 
-                setEvents={setEvents} 
-                createEvent={handleCreateEvent} 
                 selectedEvent={selectedEvent}
-                updateEvent={handleUpdateEvent}
                 key={selectedEvent ? selectedEvent.id : null }
                 />
                 )}
