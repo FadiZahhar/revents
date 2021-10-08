@@ -31,7 +31,7 @@ export default function NavBar({setFormOpen}) {
             <Menu.Item as={NavLink} exact to='/sandbox/' name='Sandbox' />
         {authenticated &&
         <Menu.Item>
-            <Button onClick={() => setFormOpen(true)} positive inverted center content="Create Event" />
+            <Button as={Link} to={`/createEvent/`} positive inverted center content="Create Event" />
         </Menu.Item>}
         {authenticated 
         ? (<SignedInMenu signOut={handleSignOut} /> )
