@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import { Form, Segment, Button } from 'semantic-ui-react';
+import { Segment, Button , FormField} from 'semantic-ui-react';
 import cuid from 'cuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent,updateEvent } from '../eventActions';
-import { Formik } from 'formik';
+import { Formik, Form,Field , ErrorMessage} from 'formik';
+import * as Yup from 'yup';
+import { errorMonitor } from 'events';
 
 export default function EventForm({match,history}) {
     const dispatch = useDispatch();
@@ -17,6 +19,10 @@ export default function EventForm({match,history}) {
         venue: '',
         date: ''
     }
+
+    const validationSchema = Yup.object({
+        title: Yup.string().required()
+    })
 
     const [values, setValues] = useState(initialValues);
     
@@ -36,45 +42,28 @@ export default function EventForm({match,history}) {
             <header content={selectedEvent ? "Edit the Event" : "create new event" } />
             <Formik
                 initialValues={initialValues}
+                validationSchema={validationSchema}
                 onSubmit={values => console.log(values)}
             >
                 {({values,handleChange,handleSubmit}) => (
 
-<Form onSubmit={handleSubmit}>
-<Form.Field>
-    <input type="text" 
-    placeholder="Event title" 
-    name='title'
-    value={values.title}
-    onChange={handleChange}
-    />
-</Form.Field>
-<Form.Field>
-    <input type="text" placeholder="Category" name='category'
-    value={values.category}
-    onChange={handleChange} />
-</Form.Field>
-
-<Form.Field>
-    <input type="text" placeholder="Description" name='description'
-    value={values.description}
-    onChange={handleChange}/>
-</Form.Field>
-<Form.Field>
-    <input type="text" placeholder="City" name='city'
-    value={values.city}
-    onChange={handleChange}/>
-</Form.Field>
-<Form.Field>
-    <input type="text" placeholder="Venue" name='venue'
-    value={values.venue}
-    onChange={handleChange} />
-</Form.Field>
-<Form.Field>
-    <input type="date" placeholder="Date" name='date'
-    value={values.date}
-    onChange={handleChange} />
-</Form.Field>
+<Form className='ui form' onSubmit={handleSubmit}>
+<FormField>
+    <Field name='title' placeholder='Event title'  />
+    <errorMessage name="title" />
+</FormField>
+<FormField>
+    <Field name='category' placeholder='Category'  />
+</FormField>
+<FormField>
+    <Field name='city' placeholder='City'  />
+</FormField>
+<FormField>
+    <Field name='venue' placeholder='Venue'  />
+</FormField>
+<FormField>
+    <Field name='date' placeholder='Date' type="date" />
+</FormField>
 <Button type="submit" floated="right" positive content="Submit" />
 <Button type="submit" floated="right"  content="Cancel" />
 </Form>
