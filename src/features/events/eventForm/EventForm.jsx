@@ -6,6 +6,7 @@ import { createEvent,updateEvent } from '../eventActions';
 import { Formik, Form,Field , ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import { errorMonitor } from 'events';
+import MyTextInput from '../../../app/common/form/MyTextInput';
 
 export default function EventForm({match,history}) {
     const dispatch = useDispatch();
@@ -21,7 +22,8 @@ export default function EventForm({match,history}) {
     }
 
     const validationSchema = Yup.object({
-        title: Yup.string().required()
+        title: Yup.string().required('You must provide a title');
+
     })
 
     const [values, setValues] = useState(initialValues);
@@ -48,10 +50,7 @@ export default function EventForm({match,history}) {
                 {({values,handleChange,handleSubmit}) => (
 
 <Form className='ui form' onSubmit={handleSubmit}>
-<FormField>
-    <Field name='title' placeholder='Event title'  />
-    <errorMessage name="title" />
-</FormField>
+<MyTextInput name='title' placeholder='Event Title' />
 <FormField>
     <Field name='category' placeholder='Category'  />
 </FormField>
