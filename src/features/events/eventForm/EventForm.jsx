@@ -59,29 +59,36 @@ export default function EventForm({match,history}) {
                     history.push('/events')
                 }}
             >
-                {({values,handleChange,handleSubmit}) => (
+               
+{({isSubmitting,dirty,isValid}) => (
+    <Form className='ui form'>
+    <Header sub color='teal' content='Event Details' />
+    <MyTextInput name='title' placeholder='Event Title' />
+    <MySelectInput name='category' placeholder='Category'  options={categoryData} />
+    <MyTextArea name='description' placeholder='Event Description' rows={3} />
+    <Header sub color='teal' content='Event Location' />
+    <MyTextInput name='city' placeholder='City'  />
+    <MyTextInput name='venue' placeholder='Venue'  />
+    <MyDateInput 
+    name='date' 
+    placeholderText='Date'
+    timeFormat="HH:mm"
+    showTimeSelect
+    TimeCaption='time'
+    dateFormat='MMMM d, yyyy h:mm a'
+    />
+    
+    <Button 
+    loading={isSubmitting}
+    disabled={!isValid || !dirty || isSubmitting}
+    type="submit" floated="right" positive content="Submit" />
+    <Button 
+    disabled={isSubmitting}
+    type="submit" floated="right"  content="Cancel" />
+    </Form>
+)}
 
-<Form className='ui form' onSubmit={handleSubmit}>
-<Header sub color='teal' content='Event Details' />
-<MyTextInput name='title' placeholder='Event Title' />
-<MySelectInput name='category' placeholder='Category'  options={categoryData} />
-<MyTextArea name='description' placeholder='Event Description' rows={3} />
-<Header sub color='teal' content='Event Location' />
-<MyTextInput name='city' placeholder='City'  />
-<MyTextInput name='venue' placeholder='Venue'  />
-<MyDateInput 
-name='date' 
-placeholderText='Date'
-timeFormat="HH:mm"
-showTimeSelect
-TimeCaption='time'
-dateFormat='MMMM d, yyyy h:mm a'
-/>
-
-<Button type="submit" floated="right" positive content="Submit" />
-<Button type="submit" floated="right"  content="Cancel" />
-</Form>
-                )}
+            
             
 
             </Formik>
