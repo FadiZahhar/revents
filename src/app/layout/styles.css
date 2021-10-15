@@ -32,3 +32,6 @@ body {
   form-size:4em;
 }
 
+.react-datepicker-wrapper {
+  width:100%;
+}
