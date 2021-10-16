@@ -4,8 +4,12 @@ import {Form,Formik} from 'formik';
 import { Button } from 'semantic-ui-react';
 import MyTextInput from '../../app/common/form/MyTextInput';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { signInUser } from './authActions';
+import { closeModal } from '../../app/common/modals/modalReducer';
 
 export default function LoginForm() {
+    const dispatch = useDispatch();
     return(
         <ModalWrapper size='mini' header='Sign in to Re-vents'>
             <Formik
@@ -14,11 +18,14 @@ export default function LoginForm() {
                 email:Yup.string().required().email(),
                 password: Yup.string().required()
             })}
-            onSubmit={values => {
-                console.log(values);
-            }}
+            onSubmit={(values,{setSubmitting}) => {
+                dispatch(signInUser(values));
+                setSubmitting(false);
+                dispatch(closeModal());
+            }
+        }
             >
-                {({isSubmitting,isValid,dirty})} =>(
+                {({isSubmitting,isValid,dirty}) =>(
                     <Form className='ui form'>
                         <MyTextInput name='email' placeholder='Email Address'  />
                         <MyTextInput name='password' placeholder='Password' type='password' />
@@ -32,7 +39,7 @@ export default function LoginForm() {
                         content='Login'
                         />
                     </Form>
-                )
+                )}
             </Formik>
         </ModalWrapper>
     )

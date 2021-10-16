@@ -8,17 +8,12 @@ import {
     NavLink
   } from "react-router-dom";
   import { useHistory } from "react-router-dom";
+import { useSelector } from 'react-redux';
 
 
 export default function NavBar({setFormOpen}) {
-    const history = useHistory();
-    const [authenticated,setAuthenticated] = useState(false);
+    const {authenticated} = useSelector(state => state.auth);
 
-    function handleSignOut() {
-        
-        setAuthenticated(false);
-        history.push('/');
-    }
 
     return (
     <Menu inverted fixed='top'>
@@ -34,8 +29,8 @@ export default function NavBar({setFormOpen}) {
             <Button as={Link} to={`/createEvent/`} positive inverted center content="Create Event" />
         </Menu.Item>}
         {authenticated 
-        ? (<SignedInMenu signOut={handleSignOut} /> )
-        : (<SignedOutMenu setAuthenticated={setAuthenticated} />)
+        ? (<SignedInMenu /> )
+        : (<SignedOutMenu  />)
         }
         </Container>
     </Menu>
