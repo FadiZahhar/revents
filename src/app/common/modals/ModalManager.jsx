@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import TestModal from '../../../features/sandbox/TestModal';
+import TestModal from  '../../../features/sandbox/TestModal';
 
 export default function ModalManager(){
     const modalLookup = {

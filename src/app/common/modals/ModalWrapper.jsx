@@ -1,7 +1,7 @@
 import React from 'react';
-import { Modal } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { closeModal} from '../modals/modalReducer';
+import { Modal } from 'semantic-ui-react';
+import { closeModal } from '../modals/modalReducer';
 
 export default function ModalWrapper({children,size,header}){
     const dispatch = useDispatch();

@@ -3,7 +3,7 @@ const CLOSE_MODAL = 'CLOSE_MODAL';
 
 export function openModal(payload) {
     return {
-        type:OPEN_MODAL,
+        type: OPEN_MODAL,
         payload
     }
 }
