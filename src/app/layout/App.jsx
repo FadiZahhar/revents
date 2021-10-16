@@ -7,6 +7,7 @@ import NavBar from '../../features/nav/NavBar';
 import {Container} from 'semantic-ui-react';
 import {Route, useLocation} from 'react-router-dom';
 import Sandbox from '../../features/sandbox/Sandbox';
+import ModalManager from '../common/modals/ModalManager';
 
 function App() {
   const {key} = useLocation();
@@ -25,6 +26,7 @@ function App() {
 
   return (
   <>
+  <ModalManager  />
   <Route exact path="/" component={HomePage} />
   <Route path={'/(.+)'} render={() => (
     <>
