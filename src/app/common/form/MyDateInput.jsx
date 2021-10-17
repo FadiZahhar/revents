@@ -10,7 +10,6 @@ export default function MyDateInput({label,...props}) {
     const [field,meta,helpers] = useField(props);
     return (
         <FormField error={meta.touched && !!meta.error}>
-            <Label>{label}</Label>
             <DatePicker
             {...field}
             {...props}
