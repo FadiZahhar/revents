@@ -4,12 +4,14 @@ import {Grid} from 'semantic-ui-react';
 import EventList from './EventList';
 import EventForm from '../eventForm/EventForm';
 import { useSelector } from 'react-redux';
+import LoadingComponent from '../../../app/layout/LoadingComponent.jsx';
 
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
     //const [events,setEvents] = useState(sampleData);
     const {events} = useSelector(state => state.event);
+    const {loading} = useSelector(state => state.async);
     
     /*function handleCreateEvent(event) {
         setEvents([...events, event])
@@ -25,6 +27,8 @@ const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  =>
         //setEvents(events.filter(evt => evt.id !== eventId));
     }
 
+
+    if(loading) return <LoadingComponent />
     return (
         <Grid>
             <Grid.Column width={10}>
