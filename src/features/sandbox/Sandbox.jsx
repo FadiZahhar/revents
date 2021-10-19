@@ -32,7 +32,6 @@ export default function Sandbox() {
         loading={loading}
         onClick={() => dispatch(decrement(10))} content='Decrement' color='red' />
         <Button 
-        loading={loading}
         onClick={() => 
             dispatch(openModal({modalType: 'TestModal', modalProps:{ data } }))
             } 
