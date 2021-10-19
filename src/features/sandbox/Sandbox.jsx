@@ -8,6 +8,7 @@ import TestMap from './TestMap';
 
 export default function Sandbox() {
     const dispatch = useDispatch();
+    const [target,setTarget] = useState(null);
     const data = useSelector((state) => state.test.data);
     const {loading} = useSelector(state => state.async);
     const defaultProps = {
@@ -26,11 +27,20 @@ export default function Sandbox() {
         <h1>Testing 123</h1>
         <h3>The data is: {data} </h3>
         <Button 
-        loading={loading}
-        onClick={() => dispatch(increment(20))} content='Increment' color='green' />
+        name='increment'
+        loading={loading && target === 'increment'}
+        onClick={(e) => {
+            dispatch(increment(20));
+            setTarget(e.target.name)
+        }} content='Increment' color='green' />
         <Button 
-        loading={loading}
-        onClick={() => dispatch(decrement(10))} content='Decrement' color='red' />
+        name='decrement'
+        loading={loading && target === 'decrement' }
+        onClick={(e) => {
+            dispatch(decrement(10));
+            setTarget(e.target.name)
+        }} 
+        content='Decrement' color='red' />
         <Button 
         onClick={() => 
             dispatch(openModal({modalType: 'TestModal', modalProps:{ data } }))
