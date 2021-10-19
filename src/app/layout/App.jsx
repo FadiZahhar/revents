@@ -8,6 +8,7 @@ import {Container} from 'semantic-ui-react';
 import {Route, useLocation} from 'react-router-dom';
 import Sandbox from '../../features/sandbox/Sandbox';
 import ModalManager from '../common/modals/ModalManager';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const {key} = useLocation();
@@ -27,6 +28,7 @@ function App() {
   return (
   <>
   <ModalManager  />
+  <ToastContainer position="bottom-right" />
   <Route exact path="/" component={HomePage} />
   <Route path={'/(.+)'} render={() => (
     <>
