@@ -5,7 +5,7 @@ import EventList from './EventList';
 import EventForm from '../eventForm/EventForm';
 import { useSelector } from 'react-redux';
 import LoadingComponent from '../../../app/layout/LoadingComponent.jsx';
-
+import EventListItemPlaceholder from './EventListItemPlaceholder';
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
@@ -28,10 +28,16 @@ const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  =>
     }
 
 
-    if(loading) return <LoadingComponent />
+
     return (
         <Grid>
             <Grid.Column width={10}>
+                {loading &&
+                <>
+                <EventListItemPlaceholder />
+                <EventListItemPlaceholder />
+                </>
+                }
                 <EventList events={events} selectEvent={selectEvent} deleteEvent={handleDeleteEvent} />
             </Grid.Column>
             <Grid.Column width={6}>
