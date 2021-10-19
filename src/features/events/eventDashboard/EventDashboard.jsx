@@ -6,6 +6,7 @@ import EventForm from '../eventForm/EventForm';
 import { useSelector } from 'react-redux';
 import LoadingComponent from '../../../app/layout/LoadingComponent.jsx';
 import EventListItemPlaceholder from './EventListItemPlaceholder';
+import EventFilters from './EventFilters.jsx';
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
@@ -41,13 +42,7 @@ const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  =>
                 <EventList events={events} selectEvent={selectEvent} deleteEvent={handleDeleteEvent} />
             </Grid.Column>
             <Grid.Column width={6}>
-                {formOpen && (
-                <EventForm 
-                setFormOpen={setFormOpen} 
-                selectedEvent={selectedEvent}
-                key={selectedEvent ? selectedEvent.id : null }
-                />
-                )}
+                <EventFilters />
             </Grid.Column>
         </Grid>
     )
