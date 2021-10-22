@@ -3,25 +3,27 @@ import {sampleData} from '../../../app/api/sampleData.js';
 import {Grid} from 'semantic-ui-react';
 import EventList from './EventList';
 import EventForm from '../eventForm/EventForm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoadingComponent from '../../../app/layout/LoadingComponent.jsx';
 import EventListItemPlaceholder from './EventListItemPlaceholder';
 import EventFilters from './EventFilters.jsx';
 import getEventsFromFirestore from '../../../app/firestore/firestoreService.js';
+import { listenToEvents } from '../eventActions.js';
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
     //const [events,setEvents] = useState(sampleData);
+    const dispatch = useDispatch();
     const {events} = useSelector(state => state.event);
     const {loading} = useSelector(state => state.async);
     
     useEffect(()=>{
         const unsubscribe = getEventsFromFirestore({
-            next: snapshot => console.log(snapshot.docs.map(docSnapshot => docSnapshot.data())),
+            next: snapshot => dispatch(listenToEvents(snapshot.docs.map(docSnapshot => docSnapshot.data()))),
             error: error => console.log(error)
         })
         return unsubscribe
-    })
+    },[dispatch])
     /*function handleCreateEvent(event) {
         setEvents([...events, event])
     }*/

@@ -1,8 +1,7 @@
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/database';
-import 'firebase/auth';
-import 'firebase/storage';
+import firebase from 'firebase/compat/app'; //v9
+import 'firebase/compat/auth'; //v9
+import 'firebase/compat/firestore'; //v9
+import 'firebase/compat/storage';
 
 const firebaseConfig= {
   apiKey: "AIzaSyC1HoRGGzR04pscwuMSoULUKQ_zH24iM_E",
@@ -14,7 +13,8 @@ const firebaseConfig= {
 }
 
 firebase.initializeApp(firebaseConfig);
+firebase.firestore();
 
-firebase.fireStore();
+
 
 export default firebase;
