@@ -9,6 +9,7 @@ import EventListItemPlaceholder from './EventListItemPlaceholder';
 import EventFilters from './EventFilters.jsx';
 import getEventsFromFirestore from '../../../app/firestore/firestoreService.js';
 import { listenToEvents } from '../eventActions.js';
+import { asyncActionError, asyncActionFinish, asyncActionStart } from '../../../app/async/asyncReducer.js';
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
@@ -18,9 +19,14 @@ const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  =>
     const {loading} = useSelector(state => state.async);
     
     useEffect(()=>{
+        dispatch(asyncActionStart())
         const unsubscribe = getEventsFromFirestore({
-            next: snapshot => dispatch(listenToEvents(snapshot.docs.map(docSnapshot => docSnapshot.data()))),
-            error: error => console.log(error)
+            next: snapshot => {
+                dispatch(listenToEvents(snapshot.docs.map(docSnapshot => docSnapshot.data())));
+                dispatch(asyncActionFinish())
+            },
+            error: error => dispatch(asyncActionError(error)),
+            complete: () => console.log('you will never see this message')
         })
         return unsubscribe
     },[dispatch])
