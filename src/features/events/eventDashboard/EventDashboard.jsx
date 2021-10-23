@@ -1,15 +1,17 @@
 import React, {useEffect} from 'react';
-import {sampleData} from '../../../app/api/sampleData.js';
+//import {sampleData} from '../../../app/api/sampleData.js';
 import {Grid} from 'semantic-ui-react';
 import EventList from './EventList';
-import EventForm from '../eventForm/EventForm';
+//import EventForm from '../eventForm/EventForm';
 import { useDispatch, useSelector } from 'react-redux';
-import LoadingComponent from '../../../app/layout/LoadingComponent.jsx';
+//import LoadingComponent from '../../../app/layout/LoadingComponent.jsx';
 import EventListItemPlaceholder from './EventListItemPlaceholder';
 import EventFilters from './EventFilters.jsx';
-import getEventsFromFirestore from '../../../app/firestore/firestoreService.js';
+//import getEventsFromFirestore, { listenToEventsFromFirestore } from '../../../app/firestore/firestoreService.js';
 import { listenToEvents } from '../eventActions.js';
-import { asyncActionError, asyncActionFinish, asyncActionStart } from '../../../app/async/asyncReducer.js';
+//import { asyncActionError, asyncActionFinish, asyncActionStart } from '../../../app/async/asyncReducer.js';
+import useFirestoreCollection from '../../../app/hooks/useFirestoreCollection.js';
+import {listenToEventsFromFirestore } from '../../../app/firestore/firestoreService.js';
 
 // array functions
 const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  => {
@@ -18,7 +20,12 @@ const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  =>
     const {events} = useSelector(state => state.event);
     const {loading} = useSelector(state => state.async);
     
-    useEffect(()=>{
+    useFirestoreCollection({
+        query: () => listenToEventsFromFirestore(),
+        data: events => dispatch(listenToEvents(events)),
+        deps: [dispatch],
+    })
+    /*useEffect(()=>{
         dispatch(asyncActionStart())
         const unsubscribe = getEventsFromFirestore({
             next: snapshot => {
@@ -29,7 +36,7 @@ const EventDashboard  = ({formOpen,setFormOpen, selectEvent, selectedEvent})  =>
             complete: () => console.log('you will never see this message')
         })
         return unsubscribe
-    },[dispatch])
+    },[dispatch])*/
     /*function handleCreateEvent(event) {
         setEvents([...events, event])
     }*/
