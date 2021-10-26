@@ -20,10 +20,11 @@ export function dataFromSnapshot(snapshot) {
         id: snapshot.id
     }
 }
-export default function getEventsFromFirestore(observer) {
-    return db.collection('events').onSnapshot(observer);
-}
 
 export function listenToEventsFromFirestore(){
     return db.collection('events');
+}
+
+export default function getEventFromFirestore(eventId) {
+    return db.collection('events').doc(eventId);
 }
