@@ -39,7 +39,7 @@ function App() {
       <Route exact path='/sandbox/' component={Sandbox} /> 
       <Route path='/events/:id' component={EventDetails} />
       <Route path={['/createEvent','/manage/:id']} component={EventForm} key={key} />
-      <Route path='/error' component={ErrorComponent}/>
+      <Route exact path='/error' component={ErrorComponent} />
     </Container>
     </>
   )} />

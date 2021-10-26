@@ -14,18 +14,21 @@ import { Redirect } from 'react-router-dom';
 
 export default function EventDetailedPage({match}) {
     const dispatch = useDispatch();
-    const event = useSelector(state => 
-        state.event.events.find(e => e.id === match.params.id)
+    const event = useSelector((state) => 
+        state.event.events.find((e) => e.id === match.params.id)
         );
     const {loading, error} = useSelector((state) => state.async);
     useFirestoreDoc({
         query:() => listenToEventsFromFirestore(match.params.id),
-        data: event => dispatch(listenToEvents([event])),
-        deps: [match.params.id,dispatch]
+        data: (event) => dispatch(listenToEvents([event])),
+        deps: [match.params.id,dispatch],
     })
 
-    if(loading || (!event && !error)) return <Loading content='Loading event...' />
-    if(error) return <Redirect to='/error' />
+   
+    //
+     
+     if(loading || (!event && !error)) return <Loading content='Loading event...' />;
+     if(error) return <Redirect to='/error' />;
     return (
         <Grid>
             <Grid.Column width={10}>
