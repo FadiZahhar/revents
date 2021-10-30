@@ -53,6 +53,7 @@ export default function EventForm({match,history}) {
     })
 
     useFirestoreDoc({
+        shouldExecute: !!match.params.id,
         query:() => listenToEventsFromFirestore(match.params.id),
         data: (event) => dispatch(listenToEvents([event])),
         deps: [match.params.id,dispatch],
@@ -63,7 +64,7 @@ export default function EventForm({match,history}) {
     const [values, setValues] = useState(initialValues);
     
 
-    if((!selectedEvent && !error)) return <LoadingComponent content='Loading event...' />;
+    //if(loading || !error) return <LoadingComponent content='Loading event...' />;
 
     if(error) return <Redirect to='/error' />
     return (
@@ -77,6 +78,7 @@ export default function EventForm({match,history}) {
                     selectedEvent 
                     ? await updateEventInFirestore(values)
                     : await addEventToFirestore(values);
+                    setSubmitting(false);
                     history.push('/events');
                     }
                     catch(error) {
