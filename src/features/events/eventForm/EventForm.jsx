@@ -13,7 +13,7 @@ import { categoryData } from '../../../app/api/categoryOptions';
 import MyDateInput from '../../../app/common/form/MyDateInput';
 import MyPlaceInput from '../../../app/common/form/MyPlaceInput';
 import useFirestoreDoc from '../../../app/hooks/useFirestoreDoc';
-import { addEventToFirestore, listenToEventsFromFirestore, updateEventInFirestore } from '../../../app/firestore/firestoreService';
+import { addEventToFirestore, cancelEventToggle, listenToEventsFromFirestore, updateEventInFirestore } from '../../../app/firestore/firestoreService';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { Redirect } from 'react-router';
 import { toast } from 'react-toastify';
@@ -117,7 +117,14 @@ export default function EventForm({match,history}) {
     TimeCaption='time'
     dateFormat='MMMM d, yyyy h:mm a'
     />
-    
+    {selectedEvent &&
+    <Button 
+    type='Button'
+    floated='left' 
+    color={selectedEvent.isCancelled ? ' green' : 'red' }
+    content={selectedEvent.isCancelled ? 'Reactivate Event' : 'Cancel Event'} 
+    onClick={()=> cancelEventToggle(selectedEvent)}
+    />}
     <Button 
     loading={isSubmitting}
     disabled={!isValid || !dirty || isSubmitting}

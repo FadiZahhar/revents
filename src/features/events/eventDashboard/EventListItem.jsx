@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item, Segment , Icon, List, Button} from 'semantic-ui-react';
+import { Item, Segment , Icon, List, Button, Label} from 'semantic-ui-react';
 import EventListAttendee from './EventListAttendee';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -21,6 +21,14 @@ export default function EventListItem({event}) {
                             <Item.Description>
                                Hosted by {event.hostedBy}
                             </Item.Description>
+                            {event.isCancelled && (
+                                <Label
+                                style={{top: '-40px'}}
+                                ribbon='right'
+                                color='red'
+                                content='This event has been cancelled'
+                                />
+                            )}
                         </Item.Content>
                     </Item>
                 </Item.Group>
