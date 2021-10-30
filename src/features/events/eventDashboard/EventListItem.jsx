@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {deleteEvent} from '../eventActions'
 import {format} from 'date-fns';
+import { deleteEventInFirestore } from '../../../app/firestore/firestoreService';
 
 export default function EventListItem({event}) {
     const dispatch = useDispatch();
@@ -40,7 +41,11 @@ export default function EventListItem({event}) {
             </Segment>
             <Segment clearing>
                 <span>{event.description}</span>
-                <Button onClick={() => dispatch(deleteEvent(event.id))} color="red" floated="right" content="Delete" />
+                <Button onClick={() => deleteEventInFirestore(event.id)} 
+                color="red" 
+                floated="right" 
+                content="Delete" 
+                />
                 <Button as={Link} to={`/events/${event.id}`} color="teal" floated="right" content="View" />
             </Segment>
         </Segment.Group>
